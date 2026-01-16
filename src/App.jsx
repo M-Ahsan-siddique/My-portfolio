@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import myself from './assets/myself.jpg';
 import { Mail, Phone, Sun, Moon } from 'lucide-react';
+import { db } from './firebase';
+import { collection, addDoc } from "firebase/firestore";
+
 
 function App() {
     const [formData, setFormData] = useState({
@@ -13,10 +16,21 @@ function App() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Form submitted:', formData);
-        alert('Thank you! Connection to Firebase will be implemented soon.');
+        try {
+            await addDoc(collection(db, "contacts"), {
+                name: formData.name,
+                type: formData.type,
+                description: formData.description,
+                timestamp: new Date()
+            });
+            alert("Message sent successfully!");
+            setFormData({ name: '', type: 'Individual', description: '' }); // Reset form
+        } catch (error) {
+            console.error("Error adding document: ", error);
+            alert("Error sending message: " + error.message);
+        }
     };
 
     return (
