@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import myself from './assets/myself.jpg';
-import { Mail, Phone, Sun, Moon } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react'; // Removed Sun/Moon as we are enforcing the dark Igloo aesthetic
 import { db } from './firebase';
 import { collection, addDoc } from "firebase/firestore";
 
@@ -26,7 +26,7 @@ function App() {
                 timestamp: new Date()
             });
             alert("Message sent successfully!");
-            setFormData({ name: '', type: 'Individual', description: '' }); // Reset form
+            setFormData({ name: '', type: 'Individual', description: '' });
         } catch (error) {
             console.error("Error adding document: ", error);
             alert("Error sending message: " + error.message);
@@ -35,12 +35,12 @@ function App() {
 
     return (
         <div className="app-container">
-            {/* Navbar / Header */}
+            {/* Navbar */}
             <header className="header">
-                <h1 className="logo">MyPortfolio</h1>
+                <h1 className="logo">Mahsa.Portfolio</h1>
                 <nav>
                     <a href="#about">About</a>
-                    <a href="#projects">Projects</a>
+                    <a href="#projects">Work</a>
                     <a href="#contact">Contact</a>
                 </nav>
             </header>
@@ -48,68 +48,61 @@ function App() {
             {/* Hero Section */}
             <section id="about" className="hero">
                 <div className="hero-content">
-                    <h1>Hello, I'm <span className="highlight">Mahsa</span></h1>
-                    <p className="subtitle">Java Developer | Database Expert | Creative Coder</p>
+                    <span className="subtitle">Java & Database Developer</span>
+                    <h1>BUILDING<br />DIGITAL<br />EXPERIENCES</h1>
                     <p className="description">
-                        I build powerful applications with Java, Visual Programming tools, and Robust Databases.
-                        Check out my work below!
+                        I craft sophisticated applications using robust Java/C# backends and intuitive data architecture.
+                        Blending logic with creativity.
                     </p>
                 </div>
                 <div className="hero-image-container">
+                    {/* Image is now rectangular and grayscale via CSS */}
                     <img src={myself} alt="Me" className="hero-image" />
                 </div>
             </section>
 
             {/* Projects Section */}
             <section id="projects" className="projects-section">
-                <h2>Featured Projects</h2>
+                <h2 className="section-title">SELECTED WORK</h2>
                 <div className="projects-grid">
 
-                    {/* Card 1: Audio Player */}
                     <div className="project-card">
-                        <div className="card-badge">Java & DB</div>
+                        <span className="card-badge">01 — Java & SQL</span>
                         <h3>Audio Player</h3>
-                        <p>A sophisticated audio player that manages playlists and tracks using a SQL database backend.</p>
+                        <p>Database-driven audio management system with playlist functionalities.</p>
                         <div className="tags">
-                            <span>Java</span>
                             <span>SQL</span>
-                            <span>JDBC</span>
+                            <span>Java</span>
                         </div>
                     </div>
 
-                    {/* Card 2: Path Finder */}
                     <div className="project-card">
-                        <div className="card-badge">Java</div>
+                        <span className="card-badge">02 — Java</span>
                         <h3>Path Finder</h3>
-                        <p>An algorithmic visualization tool that finds the shortest path between nodes using graph theory.</p>
+                        <p>Algorithmic visualization for shortest-path graph theory.</p>
                         <div className="tags">
-                            <span>Java</span>
                             <span>Algorithms</span>
                             <span>GUI</span>
                         </div>
                     </div>
 
-                    {/* Card 3: Snake Game */}
                     <div className="project-card">
-                        <div className="card-badge">Java</div>
+                        <span className="card-badge">03 — Game Dev</span>
                         <h3>Snake Game</h3>
-                        <p>A classic Snake game reimplementation with smooth controls and scoring system.</p>
+                        <p>Modern re-implementation of the classic arcade game.</p>
                         <div className="tags">
-                            <span>Java</span>
                             <span>Game Loop</span>
-                            <span>2D Graphics</span>
+                            <span>2D</span>
                         </div>
                     </div>
 
-                    {/* Card 4: Application Hub */}
                     <div className="project-card">
-                        <div className="card-badge">Visual Programming</div>
+                        <span className="card-badge">04 — C# & MySQL</span>
                         <h3>Application Hub</h3>
-                        <p>A central hub for managing various tools, built with C# and powered by MySQL for secure data storage.</p>
+                        <p>Centralized tool management dashboard with varied integrations.</p>
                         <div className="tags">
-                            <span>C#</span>
-                            <span>MySQL</span>
                             <span>.NET</span>
+                            <span>MySQL</span>
                         </div>
                     </div>
 
@@ -118,21 +111,21 @@ function App() {
 
             {/* Contact Section */}
             <section id="contact" className="contact-section">
-                <h2>Contact Us</h2>
+                <h2 className="section-title">LET'S CONNECT</h2>
                 <div className="contact-container">
                     <div className="contact-info">
+                        <p className="info-text">
+                            Interested in collaboration? <br />
+                            Fill out the form or reach out directly.
+                        </p>
                         <div className="info-item">
-                            <Mail className="icon" />
+                            <Mail size={18} />
                             <span>email@example.com</span>
                         </div>
                         <div className="info-item">
-                            <Phone className="icon" />
+                            <Phone size={18} />
                             <span>+123 456 7890</span>
                         </div>
-                        <p className="info-text">
-                            Looking for a developer? Let's discuss your project!
-                            Fill out the form and we'll get in touch.
-                        </p>
                     </div>
 
                     <form className="contact-form" onSubmit={handleSubmit}>
@@ -141,7 +134,6 @@ function App() {
                             <input
                                 type="text"
                                 name="name"
-                                placeholder="Your Name"
                                 value={formData.name}
                                 onChange={handleChange}
                                 required
@@ -149,7 +141,7 @@ function App() {
                         </div>
 
                         <div className="form-group">
-                            <label>I am representing...</label>
+                            <label>Representing</label>
                             <select name="type" value={formData.type} onChange={handleChange}>
                                 <option value="Individual">Individual</option>
                                 <option value="Company">Company</option>
@@ -157,24 +149,24 @@ function App() {
                         </div>
 
                         <div className="form-group">
-                            <label>Description of Inquiry</label>
+                            <label>Inquiry</label>
                             <textarea
                                 name="description"
-                                rows="4"
-                                placeholder="How can we help you?"
+                                rows="3"
                                 value={formData.description}
                                 onChange={handleChange}
                                 required
                             ></textarea>
                         </div>
 
-                        <button type="submit" className="submit-btn">Send Message</button>
+                        <button type="submit" className="submit-btn">Send Info</button>
                     </form>
                 </div>
             </section>
 
             <footer>
-                <p>&copy; 2026 My Portfolio. All rights reserved.</p>
+                <p>Designed by Mahsa</p>
+                <p>&copy; 2026</p>
             </footer>
         </div>
     )
