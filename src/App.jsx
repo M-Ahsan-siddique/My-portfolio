@@ -39,7 +39,7 @@ function App() {
         <div className="app-container">
             {/* Navbar */}
             <header className="header">
-                <h1 className="logo">Mahsa.Portfolio</h1>
+                <h1 className="logo">Ahsan.Portfolio</h1>
                 <nav>
                     <a href="#about">About</a>
                     <a href="#projects">Work</a>
@@ -59,7 +59,7 @@ function App() {
                 </div>
                 <div className="hero-image-container">
                     {/* Image is now rectangular and grayscale via CSS */}
-                    <img src={myself} alt="Me" className="hero-image" />
+                    <img src={myself} alt="Me" className="hero-image" loading="eager" />
                 </div>
             </section>
 
@@ -122,11 +122,11 @@ function App() {
                         </p>
                         <div className="info-item">
                             <Mail size={18} />
-                            <span>email@example.com</span>
+                            <span>M.Ahsansiddique@hotmail.com</span>
                         </div>
                         <div className="info-item">
                             <Phone size={18} />
-                            <span>+123 456 7890</span>
+                            <span>+923141483597</span>
                         </div>
                     </div>
 
