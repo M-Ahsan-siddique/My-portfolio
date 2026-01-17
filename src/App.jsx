@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import myself from './assets/profile_alt.jpeg';
-import { Mail, Phone } from 'lucide-react'; // Removed Sun/Moon as we are enforcing the dark Igloo aesthetic
+import { Mail, Phone, Menu, X } from 'lucide-react'; // Removed Sun/Moon as we are enforcing the dark Igloo aesthetic
 import { db } from './firebase';
 import { collection, addDoc } from "firebase/firestore";
 
@@ -12,10 +12,13 @@ function App() {
         type: 'Individual', // Individual or Company
         description: ''
     });
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+
+    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -40,11 +43,27 @@ function App() {
             {/* Navbar */}
             <header className="header">
                 <h1 className="logo">Ahsan.Portfolio</h1>
-                <nav>
+
+                {/* Desktop Nav */}
+                <nav className="desktop-nav">
                     <a href="#about">About</a>
                     <a href="#projects">Work</a>
                     <a href="#contact">Contact</a>
                 </nav>
+
+                {/* Mobile Menu Button */}
+                <button className="mobile-menu-btn" onClick={toggleMenu} aria-label="Toggle menu">
+                    {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+                </button>
+
+                {/* Mobile Nav Overlay */}
+                <div className={`mobile-nav ${isMenuOpen ? 'open' : ''}`}>
+                    <nav>
+                        <a href="#about" onClick={toggleMenu}>About</a>
+                        <a href="#projects" onClick={toggleMenu}>Work</a>
+                        <a href="#contact" onClick={toggleMenu}>Contact</a>
+                    </nav>
+                </div>
             </header>
 
             {/* Hero Section */}
@@ -178,7 +197,7 @@ function App() {
             </section>
 
             <footer>
-                <p>Designed by Mahsa</p>
+                <p>Designed by Ahsan Siddique</p>
                 <p>&copy; 2026</p>
             </footer>
         </div>

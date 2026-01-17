@@ -115,7 +115,8 @@ body {
   color: transparent;
 }
 
-nav a {
+/* --- NAVBAR --- */
+.desktop-nav a {
   margin-left: 2.5rem;
   text-decoration: none;
   color: var(--text-secondary);
@@ -127,12 +128,12 @@ nav a {
   position: relative;
 }
 
-nav a:hover {
+.desktop-nav a:hover {
   color: white;
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
-nav a::after {
+.desktop-nav a::after {
   content: '';
   position: absolute;
   bottom: -4px;
@@ -144,8 +145,70 @@ nav a::after {
   box-shadow: 0 0 5px var(--accent-cyan);
 }
 
-nav a:hover::after {
+.desktop-nav a:hover::after {
   width: 100%;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+  display: none;
+  /* Hidden on desktop */
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 1002;
+  transition: color 0.3s;
+}
+
+.mobile-menu-btn:hover {
+  color: var(--accent-cyan);
+  filter: drop-shadow(0 0 5px var(--accent-cyan));
+}
+
+/* Mobile Nav Overlay */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(15, 12, 41, 0.95);
+  backdrop-filter: blur(15px);
+  z-index: 1001;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.mobile-nav.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobile-nav nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: center;
+}
+
+.mobile-nav a {
+  font-size: 2rem;
+  text-decoration: none;
+  color: white;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: color 0.3s;
+}
+
+.mobile-nav a:hover {
+  color: var(--accent-cyan);
+  text-shadow: 0 0 15px var(--accent-cyan);
 }
 
 /* --- HERO --- */
@@ -533,8 +596,18 @@ footer {
     gap: 3rem;
   }
 
+  /* Hide Desktop Nav on Mobile */
+  .desktop-nav {
+    display: none;
+  }
+
+  /* Show Mobile Menu Button */
+  .mobile-menu-btn {
+    display: block;
+  }
+
   nav a {
-    margin-left: 1rem;
-    font-size: 0.8rem;
+    /* Removed old mobile specific overrides since we use the overlay now */
+    margin: 0;
   }
 }
