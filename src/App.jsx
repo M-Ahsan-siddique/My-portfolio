@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import myself from './assets/myself.jpg';
+import myself from './assets/profile_alt.jpeg';
 import { Mail, Phone } from 'lucide-react'; // Removed Sun/Moon as we are enforcing the dark Igloo aesthetic
 import { db } from './firebase';
 import { collection, addDoc } from "firebase/firestore";
@@ -8,6 +8,7 @@ import { collection, addDoc } from "firebase/firestore";
 function App() {
     const [formData, setFormData] = useState({
         name: '',
+        email: '',
         type: 'Individual', // Individual or Company
         description: ''
     });
@@ -21,12 +22,13 @@ function App() {
         try {
             await addDoc(collection(db, "contacts"), {
                 name: formData.name,
+                email: formData.email,
                 type: formData.type,
                 description: formData.description,
                 timestamp: new Date()
             });
             alert("Message sent successfully!");
-            setFormData({ name: '', type: 'Individual', description: '' });
+            setFormData({ name: '', email: '', type: 'Individual', description: '' });
         } catch (error) {
             console.error("Error adding document: ", error);
             alert("Error sending message: " + error.message);
@@ -135,6 +137,17 @@ function App() {
                                 type="text"
                                 name="name"
                                 value={formData.name}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label>Email</label>
+                            <input
+                                type="email"
+                                name="email"
+                                value={formData.email}
                                 onChange={handleChange}
                                 required
                             />
