@@ -1,4 +1,4 @@
 [build]
   base    = "My-portfolio-main"
   command = "npm run build"
-  publish = "My-portfolio-main/dist"
+  publish = "dist"

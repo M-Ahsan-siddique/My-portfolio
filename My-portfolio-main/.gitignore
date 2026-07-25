@@ -114,5 +114,4 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# User Assets
-src/assets/
+
